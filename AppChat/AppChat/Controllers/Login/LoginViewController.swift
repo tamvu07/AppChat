@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseAuth
-//import FBSDKLoginKit
+import FBSDKLoginKit
 //import GoogleSignIn
 //import JGProgressHUD
 
@@ -70,11 +70,11 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-//    private let facebookLoginButton: FBLoginButton = {
-//        let button = FBLoginButton()
-//        button.permissions = ["email", "public_profile"]
-//        return button
-//    }()
+    private let facebookLoginButton: FBLoginButton = {
+        let button = FBLoginButton()
+        button.permissions = ["email", "public_profile"]
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,14 +103,14 @@ class LoginViewController: UIViewController {
         emailField.delegate = self
         passwordField.delegate = self
 //
-//        facebookLoginButton.delegate = self
+        facebookLoginButton.delegate = self
         
             // Add subviews
         view.addSubview(scrollView)
         view.addSubview(imageView)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
-//        scrollView.addSubview(facebookLoginButton)
+        scrollView.addSubview(facebookLoginButton)
 //        scrollView.addSubview(googleLogInButton)
     
         scrollView.addSubview(loginButton)
@@ -138,10 +138,10 @@ class LoginViewController: UIViewController {
                                   width: scrollView.width - 60,
                                  height: 52)
         
-//        facebookLoginButton.frame = CGRect(x: 30,
-//                                  y: loginButton.bottom + 10,
-//                                  width: scrollView.width - 60,
-//                                 height: 52)
+        facebookLoginButton.frame = CGRect(x: 30,
+                                  y: loginButton.bottom + 10,
+                                  width: scrollView.width - 60,
+                                 height: 52)
 //        googleLogInButton.frame = CGRect(x: 30,
 //                                  y: facebookLoginButton.bottom + 10,
 //                                  width: scrollView.width - 60,
@@ -212,3 +212,100 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
+
+extension LoginViewController: LoginButtonDelegate {
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        // no operation
+    }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else {
+            print("User failed to log in with facebook")
+            return
+        }
+        
+        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
+                                                         parameters: ["fields":"email, first_name, last_name, picture.type(large)"],
+                                                         tokenString: token,
+                                                         version: nil,
+                                                         httpMethod: .get)
+        facebookRequest.start(completion: {_, result, error in
+            guard let result = result as? [String: Any], error == nil else {
+                print("Failed to make facebook graph request")
+                return
+            }
+            print("\(result)")
+            
+            guard let firstName = result["first_name"] as? String,
+                  let lastName = result["last_name"] as? String,
+                  let email = result["email"] as? String,
+                  let picture = result["picture"] as? [String: Any],
+                  let data = picture["data"] as? [String: Any],
+                  let pictureUrl = data["url"] as? String
+                  else {
+                print("Failed to get email and name from FB result")
+                return
+            }
+            
+            UserDefaults.standard.setValue(email, forKey: "email")
+            
+            // luu email vao Realtime Database
+            DatabaseManager.shared.userExists(with: email, completion: {exists in
+                if !exists {
+                    let chatUser = ChatAppUser(firstName: firstName,
+                                               lastName: lastName,
+                                               emailAddress: email)
+                    
+                    DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
+                        if success {
+                            
+                            guard let url = URL(string: pictureUrl) else {
+                                return
+                            }
+                            
+                            print("Downloading data from facebook image")
+                            
+                            URLSession.shared.dataTask(with: url, completionHandler: { data, _, _ in
+                                guard let data = data else {
+                                    print("Failed to get data from facebook")
+                                    return
+                                }
+                                print("got data from FB, uploading...")
+                                // upload image
+                                let fileName = chatUser.profilePictureFileName
+//                                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, success: { downloadUrl in
+//                                    UserDefaults.standard.setValue(downloadUrl, forKey: "Profile_picture_url")
+//                                    print(downloadUrl)
+//                                }, failured: { error in
+//                                    print("Storage manager error: \(error)")
+//                                })
+                            }).resume()
+                        }
+                    })
+                }
+            })
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: token)
+            // dang nhao email vao Authentication
+            FirebaseAuth.Auth.auth().signIn(with: credential, completion: { [weak self] authResult, error in
+                
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                guard authResult != nil, error == nil else {
+                    if let error = error {
+                        print("Facebook credentail login failed, MFA may be needed - \(error)")
+                    }
+                    return
+                }
+                
+                print("Successfully logged user in")
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
+            
+        })
+    }
+}
+

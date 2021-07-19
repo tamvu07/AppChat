@@ -9,5 +9,9 @@ target 'AppChat' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  
+  # dang nhap voi facebook
+  pod 'FBSDKLoginKit'
+  
 
 end
