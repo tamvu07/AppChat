@@ -183,56 +183,56 @@ class RegisterViewController: UIViewController {
         }
         
 //        spinner.show(in: view)
-//        
-//        DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
-//            
-//            guard let strongSelf = self else {
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
+        
+        DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            DispatchQueue.main.async {
 //                strongSelf.spinner.dismiss()
-//            }
-//            
-//            guard !exists else {
-//                // user alreaady exists
-//                strongSelf.alertUserLoginError(message: "Information are exists !!!")
-//                return
-//            }
-//            
-//            
-//            // Firebase Log in
-//            FirebaseAuth.Auth.auth().createUser(withEmail: email,
-//                                                password: password,
-//                                                completion: { authResult, error in
-//                
-//                
-//                guard authResult != nil, error == nil else {
-//                    print("Error creating user")
-//                    return
-//                }
-//               let chatUser = ChatAppUser(firstName: firstName,
-//                                           lastName: lastname,
-//                                           emailAddress: email)
-//                                                    
-//                DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
-//                    if success {
-//                        // upload image
-//                        guard let image = strongSelf.imageView.image, let data = image.pngData() else {
-//                            return
-//                        }
-//                        let fileName = chatUser.profilePictureFileName
+            }
+            
+            guard !exists else {
+                // user alreaady exists
+                strongSelf.alertUserLoginError(message: "Information are exists !!!")
+                return
+            }
+            
+            
+            // Firebase Log in
+            FirebaseAuth.Auth.auth().createUser(withEmail: email,
+                                                password: password,
+                                                completion: { authResult, error in
+                
+                
+                guard authResult != nil, error == nil else {
+                    print("Error creating user")
+                    return
+                }
+               let chatUser = ChatAppUser(firstName: firstName,
+                                           lastName: lastname,
+                                           emailAddress: email)
+                                                    
+                DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
+                    if success {
+                        // upload image
+                        guard let image = strongSelf.imageView.image, let data = image.pngData() else {
+                            return
+                        }
+                        let fileName = chatUser.profilePictureFileName
 //                        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, success: { downloadUrl in
 //                            UserDefaults.standard.setValue(downloadUrl, forKey: "Profile_picture_url")
 //                            print(downloadUrl)
 //                        }, failured: { error in
 //                            print("Storage manager error: \(error)")
 //                        })
-//                    }
-//                })
-//                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
-//            })
-//        })
+                    }
+                })
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
+        })
     }
     
     func alertUserLoginError(message: String) {

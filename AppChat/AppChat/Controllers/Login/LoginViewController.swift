@@ -13,6 +13,8 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
+//    private let spinner = JGProgressHUD(style: .dark)
+    
     private let scrollView: UIScrollView = {
         let scroolView = UIScrollView()
         scroolView.clipsToBounds = true
@@ -168,7 +170,7 @@ class LoginViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                strongSelf.spinner.dismiss()
+//                strongSelf.spinner.dismiss()
             }
 
             guard let result = authResult, error == nil else {

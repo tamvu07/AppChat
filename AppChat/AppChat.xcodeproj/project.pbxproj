@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		E54EA99F26A520BB00DEAC00 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA99E26A520BB00DEAC00 /* NewConversationViewController.swift */; };
 		E54EA9A226A520D900DEAC00 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA9A126A520D900DEAC00 /* ProfileViewController.swift */; };
 		E54EA9A726A5264100DEAC00 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA9A626A5264100DEAC00 /* Extensions.swift */; };
+		E54EA9BA26A54AC600DEAC00 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E54EA99E26A520BB00DEAC00 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		E54EA9A126A520D900DEAC00 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E54EA9A626A5264100DEAC00 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,6 @@
 				681D63BDBFB11D6DF961FEE5 /* Pods-AppChat.debug.xcconfig */,
 				39733309B8E69BF44999770F /* Pods-AppChat.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -150,6 +151,7 @@
 				E54EA96F26A51B5300DEAC00 /* AppDelegate.swift */,
 				E54EA97126A51B5300DEAC00 /* SceneDelegate.swift */,
 				E54EA9A626A5264100DEAC00 /* Extensions.swift */,
+				E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -288,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E54EA99326A5200500DEAC00 /* LoginViewController.swift in Sources */,
+				E54EA9BA26A54AC600DEAC00 /* DatabaseManager.swift in Sources */,
 				E54EA99626A5203100DEAC00 /* RegisterViewController.swift in Sources */,
 				E54EA99F26A520BB00DEAC00 /* NewConversationViewController.swift in Sources */,
 				E54EA97426A51B5300DEAC00 /* ConversationsViewController.swift in Sources */,
