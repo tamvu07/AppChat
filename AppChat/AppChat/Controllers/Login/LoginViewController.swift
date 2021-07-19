@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+//import FBSDKLoginKit
+//import GoogleSignIn
+//import JGProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -157,28 +161,28 @@ class LoginViewController: UIViewController {
 //        spinner.show(in: view)
         
         // Firebase Log in
-//        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
-//
-//            guard let strongSelf = self else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                strongSelf.spinner.dismiss()
-//            }
-//
-//            guard let result = authResult, error == nil else {
-//                print("Failed to log in uer with email: \(email)")
-//                return
-//            }
-//
-//            let user = result.user
-//
-//            UserDefaults.standard.setValue(email, forKey: "email")
-//
-//            print("Logged In User:\(user)")
-//            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
-//        })
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
+
+            guard let strongSelf = self else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+
+            guard let result = authResult, error == nil else {
+                print("Failed to log in uer with email: \(email)")
+                return
+            }
+
+            let user = result.user
+
+            UserDefaults.standard.setValue(email, forKey: "email")
+
+            print("Logged In User:\(user)")
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+        })
     }
     
     func alertUserLoginError() {

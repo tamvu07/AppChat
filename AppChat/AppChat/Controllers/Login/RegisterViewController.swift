@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+//import JGProgressHUD
 
 class RegisterViewController: UIViewController {
     
@@ -293,7 +295,6 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         self.imageView.image = selectedImage
-//        self.imageView.image = sele
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
