@@ -224,16 +224,16 @@ extension DatabaseManager {
             ]
             
             // Update recipient conversation entry
-//            self?.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { [weak self] snapshot in
-//                if var conversations = snapshot.value as? [[String: Any]] {
-//                    // append
-//                    conversations.append(recipient_newConversationData)
-//                    self?.database.child("\(otherUserEmail)/conversations").setValue(conversations)
-//                } else {
-//                    // create
-//                    self?.database.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
-//                }
-//            })
+            self?.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { [weak self] snapshot in
+                if var conversations = snapshot.value as? [[String: Any]] {
+                    // append
+                    conversations.append(recipient_newConversationData)
+                    self?.database.child("\(otherUserEmail)/conversations").setValue(conversations)
+                } else {
+                    // create
+                    self?.database.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
+                }
+            })
             
             // Update current user conversation entry
             if var conversations = userNode["conversations"] as? [[String: Any]]  {

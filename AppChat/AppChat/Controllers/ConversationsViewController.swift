@@ -31,8 +31,7 @@ class ConversationsViewController: UIViewController {
     private let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
+        table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         return table
     }()
 
@@ -56,37 +55,37 @@ class ConversationsViewController: UIViewController {
         view.addSubview(noConversationsLabel)
         setupTableView()
         fetchConversations()
-//        startListeningForConversations()
+        startListeningForConversations()
     }
     
-//    private func startListeningForConversations() {
-//        guard  let email = UserDefaults.standard.value(forKey: "email") as? String else {
-//            return
-//        }
-//
-//        print("Starting conversation fetch...")
-//
-//        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-//
-//        DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
-//            switch result {
-//            case .success(let conversations):
-//                print("successfully got conversation models")
-//                guard !conversations.isEmpty else {
-//                    return
-//                }
-//
-//                self?.conversations = conversations
-//
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                }
-//
-//            case .failure(let error):
-//                print("Failed to \(error)")
-//            }
-//        })
-//    }
+    private func startListeningForConversations() {
+        guard  let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+
+        print("Starting conversation fetch...")
+
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+
+        DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
+            switch result {
+            case .success(let conversations):
+                print("successfully got conversation models")
+                guard !conversations.isEmpty else {
+                    return
+                }
+
+                self?.conversations = conversations
+
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+
+            case .failure(let error):
+                print("Failed to \(error)")
+            }
+        })
+    }
     
     @objc private func didTapComposeButton() {
         let vc = NewConversationViewController()
@@ -142,16 +141,13 @@ class ConversationsViewController: UIViewController {
 
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return conversations.count
-        return 1
+        return conversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let model = conversations[indexPath.row]
-//        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier, for: indexPath) as! ConversationTableViewCell
-//        cell.configure(with: model)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "abc"
+        let model = conversations[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier, for: indexPath) as! ConversationTableViewCell
+        cell.configure(with: model)
         return cell
     }
     
