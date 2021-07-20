@@ -88,6 +88,7 @@ class RegisterViewController: UIViewController {
         field.leftViewMode = .always
         field.backgroundColor = .white
         field.isSecureTextEntry = true
+        field.textContentType = .oneTimeCode
         return field
     }()
     
@@ -183,6 +184,8 @@ class RegisterViewController: UIViewController {
         }
         
         spinner.show(in: view)
+        
+        UserDefaults.standard.setValue(email, forKey: "email")
         
         DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
             

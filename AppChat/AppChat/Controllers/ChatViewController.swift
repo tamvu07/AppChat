@@ -57,18 +57,18 @@ struct Sender: SenderType {
 
 class ChatViewController: MessagesViewController {
     
-//    public static var dateFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .long
-//        formatter.locale = .current
-//        return formatter
-//    }()
-//    
-//    public var otherUserEmail: String
-//    private var conversationId: String?
-//    
-//    public var isNewConversation = false
+    public static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .long
+        formatter.locale = .current
+        return formatter
+    }()
+    
+    public var otherUserEmail: String
+    private var conversationId: String?
+    
+    public var isNewConversation = false
     
     private var messages = [Message]()
     
@@ -84,15 +84,15 @@ class ChatViewController: MessagesViewController {
                       photURL: "")
     }
     
-//    init(with email: String, id: String?) {
-//        self.conversationId = id
-//        self.otherUserEmail = email
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    init(with email: String, id: String?) {
+        self.conversationId = id
+        self.otherUserEmail = email
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,9 +100,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-//        messageInputBar.delegate = self
-        
-        messages.append(Message(messageId: "1", sentDate: Date(), kind: .text("abc"), sender: selfSender as! SenderType))
+        messageInputBar.delegate = self
     }
     
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
@@ -131,63 +129,63 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        messageInputBar.inputTextView.becomeFirstResponder()
-//        if let conversationId = conversationId {
-//            listenForMessages(id: conversationId, shouldScrollToBottom: true)
-//        }
+        messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversationId = conversationId {
+            listenForMessages(id: conversationId, shouldScrollToBottom: true)
+        }
     }
     
 }
 
-//extension ChatViewController: InputBarAccessoryViewDelegate {
-//
-//    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-//        guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
-//              let selfSender = self.selfSender,
-//              let messageId = createMessageId() else {
-//            return
-//        }
-//
-//        print("Sending: \(text)")
-//
-//        // Send Message
-//        if isNewConversation {
-//            // Create conversation in database
-//            let message = Message(messageId: messageId,
-//                                  sentDate: Date(),
-//                                  kind: .text(text),
-//                                  sender: selfSender)
-//            DatabaseManager.shared.createNewconversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
-//                if success {
-//                    print("message sent")
-//                } else {
-//                    print("failed of send")
-//                }
-//            })
-//        } else {
-//            // append to existing conversation data
-//
-//        }
-//    }
-//
-//    private func createMessageId() -> String? {
-//        // date, otherUserEmail, senderEmail, randomInt
-//        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
-//            return nil
-//        }
-//
-//        let safeCurrentEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
-//
-//        let dateString = Self.dateFormatter.string(from: Date())
-//
-//        let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateString)"
-//
-//        print("created message id:\(newIdentifier)")
-//
-//        return newIdentifier
-//    }
-//
-//}
+extension ChatViewController: InputBarAccessoryViewDelegate {
+
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
+              let selfSender = self.selfSender,
+              let messageId = createMessageId() else {
+            return
+        }
+
+        print("Sending: \(text)")
+
+        // Send Message
+        if isNewConversation {
+            // Create conversation in database
+            let message = Message(messageId: messageId,
+                                  sentDate: Date(),
+                                  kind: .text(text),
+                                  sender: selfSender)
+            DatabaseManager.shared.createNewconversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
+                if success {
+                    print("message sent")
+                } else {
+                    print("failed of send")
+                }
+            })
+        } else {
+            // append to existing conversation data
+
+        }
+    }
+
+    private func createMessageId() -> String? {
+        // date, otherUserEmail, senderEmail, randomInt
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return nil
+        }
+
+        let safeCurrentEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
+
+        let dateString = Self.dateFormatter.string(from: Date())
+
+        let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateString)"
+
+        print("created message id:\(newIdentifier)")
+
+        return newIdentifier
+    }
+
+}
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
     func currentSender() -> SenderType {
