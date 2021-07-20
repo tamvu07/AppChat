@@ -7,11 +7,11 @@
 
 import UIKit
 import FirebaseAuth
-//import JGProgressHUD
+import JGProgressHUD
 
 class RegisterViewController: UIViewController {
     
-//    private let spinner = JGProgressHUD(style: .dark)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
         let scroolView = UIScrollView()
@@ -182,7 +182,7 @@ class RegisterViewController: UIViewController {
             return
         }
         
-//        spinner.show(in: view)
+        spinner.show(in: view)
         
         DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
             
@@ -191,7 +191,7 @@ class RegisterViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-//                strongSelf.spinner.dismiss()
+                strongSelf.spinner.dismiss()
             }
             
             guard !exists else {

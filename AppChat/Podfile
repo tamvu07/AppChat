@@ -15,6 +15,11 @@ target 'AppChat' do
   
   #Google Sign IN
   pod 'GoogleSignIn', '~> 5.0'
-
+  pod 'MessageKit'
+  pod 'JGProgressHUD'
+  pod 'RealmSwift'
+  pod 'SDWebImage'
+  
+  pod 'Firebase/Storage'
 
 end

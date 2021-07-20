@@ -9,11 +9,11 @@ import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
-//import JGProgressHUD
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     
-//    private let spinner = JGProgressHUD(style: .dark)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
         let scroolView = UIScrollView()
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         emailField.delegate = self
         passwordField.delegate = self
-//
+
         facebookLoginButton.delegate = self
         
             // Add subviews
@@ -170,7 +170,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-//        spinner.show(in: view)
+        spinner.show(in: view)
         
         // Firebase Log in
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
@@ -180,7 +180,7 @@ class LoginViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-//                strongSelf.spinner.dismiss()
+                strongSelf.spinner.dismiss()
             }
 
             guard let result = authResult, error == nil else {
