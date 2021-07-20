@@ -95,12 +95,12 @@ extension AppDelegate: GIDSignInDelegate {
                                     return
                                 }
                                 let fileName = chatUser.profilePictureFileName
-//                                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, success: { downloadUrl in
-//                                    UserDefaults.standard.setValue(downloadUrl, forKey: "Profile_picture_url")
-//                                    print(downloadUrl)
-//                                }, failured: { error in
-//                                    print("Storage manager error: \(error)")
-//                                })
+                                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, success: { downloadUrl in
+                                    UserDefaults.standard.setValue(downloadUrl, forKey: "Profile_picture_url")
+                                    print(downloadUrl)
+                                }, failured: { error in
+                                    print("Storage manager error: \(error)")
+                                })
                             }).resume()
                         }
                     }

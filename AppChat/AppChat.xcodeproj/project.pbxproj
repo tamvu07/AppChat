@@ -24,6 +24,7 @@
 		E54EA9A726A5264100DEAC00 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA9A626A5264100DEAC00 /* Extensions.swift */; };
 		E54EA9BA26A54AC600DEAC00 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */; };
 		E5694BF526A663EB00D00526 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694BF426A663EB00D00526 /* ChatViewController.swift */; };
+		E5694BF826A6724500D00526 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694BF726A6724500D00526 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E54EA9A626A5264100DEAC00 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E5694BF426A663EB00D00526 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		E5694BF726A6724500D00526 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				E54EA97126A51B5300DEAC00 /* SceneDelegate.swift */,
 				E54EA9A626A5264100DEAC00 /* Extensions.swift */,
 				E54EA9B926A54AC600DEAC00 /* DatabaseManager.swift */,
+				E5694BF726A6724500D00526 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				E54EA97226A51B5300DEAC00 /* SceneDelegate.swift in Sources */,
 				E5694BF526A663EB00D00526 /* ChatViewController.swift in Sources */,
 				E54EA99926A5206A00DEAC00 /* PhotoViewerViewController.swift in Sources */,
+				E5694BF826A6724500D00526 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
