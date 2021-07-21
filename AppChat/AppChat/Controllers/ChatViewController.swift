@@ -105,31 +105,27 @@ class ChatViewController: MessagesViewController {
     
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
         
-        messages.append(Message(messageId: "1", sentDate: Date(), kind: .text("abc"), sender: selfSender as! SenderType))
-        
-        return
-        
-//        DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
-//            switch result {
-//            case .success(let messages):
-//                print("succes in getting messages \(messages)")
-//                guard !messages.isEmpty else {
-//                    print("messages are empty")
-//                    return
-//                }
-//                self?.messages = messages
-//
-//                DispatchQueue.main.async {
-//                    self?.messagesCollectionView.reloadDataAndKeepOffset()
-//                    if shouldScrollToBottom {
-//                        self?.messagesCollectionView.scrollToBottom()
-//                    }
-//                }
-//
-//            case .failure(let error):
-//                print("Failed to get messages: \(error)")
-//            }
-//        })
+        DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
+            switch result {
+            case .success(let messages):
+                print("succes in getting messages \(messages)")
+                guard !messages.isEmpty else {
+                    print("messages are empty")
+                    return
+                }
+                self?.messages = messages
+
+                DispatchQueue.main.async {
+                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    if shouldScrollToBottom {
+                        self?.messagesCollectionView.scrollToBottom()
+                    }
+                }
+
+            case .failure(let error):
+                print("Failed to get messages: \(error)")
+            }
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {

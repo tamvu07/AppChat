@@ -397,9 +397,9 @@ extension DatabaseManager {
                     return nil
                 }
                 
-                let sender = Sender(senderId: "",
-                                    displayName: senderEmail,
-                                    photURL: name)
+                let sender = Sender(senderId: senderEmail,
+                                    displayName: name,
+                                    photURL: "")
                 return Message(messageId: messageID,
                                sentDate: date,
                                kind: .text(content),
