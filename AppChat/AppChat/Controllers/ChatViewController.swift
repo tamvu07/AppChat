@@ -118,7 +118,7 @@ class ChatViewController: MessagesViewController {
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
                     if shouldScrollToBottom {
-                        self?.messagesCollectionView.scrollToBottom()
+                        self?.messagesCollectionView.scrollToLastItem()
                     }
                 }
 
@@ -149,26 +149,38 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
         print("Sending: \(text)")
 
+        let message = Message(messageId: messageId,
+                              sentDate: Date(),
+                              kind: .text(text),
+                              sender: selfSender)
+        
         // Send Message
         if isNewConversation {
             // Create conversation in database
-            let message = Message(messageId: messageId,
-                                  sentDate: Date(),
-                                  kind: .text(text),
-                                  sender: selfSender)
+            
             DatabaseManager.shared.createNewconversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
                 if success {
                     print("message sent")
+                    self.isNewConversation = false
                 } else {
                     print("failed of send")
                 }
             })
         } else {
+            guard let conversationId = conversationId, let name = self.title else {
+                return
+            }
             // append to existing conversation data
-
+            DatabaseManager.shared.sendMessage(to: conversationId,otherUserEmail: otherUserEmail, name: name, newMessage: message, completion: { success in
+                if success {
+                    print("message sent")
+                } else {
+                    print("failed to send")
+                }
+            })
         }
     }
-
+    
     private func createMessageId() -> String? {
         // date, otherUserEmail, senderEmail, randomInt
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
