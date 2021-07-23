@@ -26,6 +26,7 @@
 		E5694BF526A663EB00D00526 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694BF426A663EB00D00526 /* ChatViewController.swift */; };
 		E5694BF826A6724500D00526 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694BF726A6724500D00526 /* StorageManager.swift */; };
 		E5694C0126A6B64B00D00526 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694C0026A6B64B00D00526 /* ConversationTableViewCell.swift */; };
+		E58DEC2E26AAB1E200E82803 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEC2D26AAB1E200E82803 /* NewConversationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		E5694BF426A663EB00D00526 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		E5694BF726A6724500D00526 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E5694C0026A6B64B00D00526 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		E58DEC2D26AAB1E200E82803 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				E54EA98D26A51E4A00DEAC00 /* Storyboards */,
 				E54EA97826A51B5500DEAC00 /* Assets.xcassets */,
 				E5694C0026A6B64B00D00526 /* ConversationTableViewCell.swift */,
+				E58DEC2D26AAB1E200E82803 /* NewConversationCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E54EA99326A5200500DEAC00 /* LoginViewController.swift in Sources */,
+				E58DEC2E26AAB1E200E82803 /* NewConversationCell.swift in Sources */,
 				E54EA9BA26A54AC600DEAC00 /* DatabaseManager.swift in Sources */,
 				E54EA99626A5203100DEAC00 /* RegisterViewController.swift in Sources */,
 				E54EA99F26A520BB00DEAC00 /* NewConversationViewController.swift in Sources */,

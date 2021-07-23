@@ -103,5 +103,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow access to send audio and video messages.</string>
 </dict>
 </plist>

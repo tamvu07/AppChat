@@ -403,16 +403,21 @@ extension DatabaseManager {
             }
             
             let messages: [Message] = value.compactMap({ dictionary in
+                
                 guard let name = dictionary["name"] as? String,
                 let isRead = dictionary["is_read"] as? Bool,
                 let messageID = dictionary["id"] as? String,
                 let content = dictionary["content"] as? String,
                 let senderEmail = dictionary["sender_email"] as? String,
                 let type = dictionary["type"] as? String,
-                let dateString = dictionary["date"] as? String,
-                let date = ChatViewController.dateFormatter.date(from: dateString) else {
+                let dateString = dictionary["date"] as? String
+//                ,
+//                let date = ChatViewController.dateFormatter.date(from: dateString)
+                else {
                     return nil
                 }
+                
+                let date = Date()
                 
                 var kind: MessageKind?
                 if type == "photo" {
@@ -426,6 +431,17 @@ extension DatabaseManager {
                                       placeholderImage: placeholder,
                                       size: CGSize(width: 300, height: 300))
                     kind = .photo(media)
+                }  else if type == "video" {
+                    // photo
+                    guard let videoUrl = URL(string: content),
+                          let placeholder = UIImage(named: "video_placeholder") else {
+                        return nil
+                    }
+                    let media = Media(url: videoUrl,
+                                      image: nil,
+                                      placeholderImage: placeholder,
+                                      size: CGSize(width: 300, height: 300))
+                    kind = .video(media)
                 } else {
                     kind = .text(content)
                 }
@@ -484,7 +500,10 @@ extension DatabaseManager {
                     message = targetUrlString
                 }
                 break
-            case .video(_):
+            case .video(let mediaItem):
+                if let targetUrlString = mediaItem.url?.absoluteString {
+                    message = targetUrlString
+                }
                 break
             case .location(_):
                 break
@@ -525,6 +544,7 @@ extension DatabaseManager {
                     return
                 }
                 
+                // lay thong tin conversations cua user gui
                 strongSelf.database.child("\(currentEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
                     guard var currentUserConversations = snapshot.value as? [[String: Any]]else {
                         completion(false)
@@ -552,14 +572,14 @@ extension DatabaseManager {
                         return
                     }
                     currentUserConversations[position] = finalConversation
+                    // update latest message for current user
                     strongSelf.database.child("\(currentEmail)/conversations").setValue(currentUserConversations, withCompletionBlock: { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
                         }
                         
-                        // update latest message for recipient user
-                        
+                        // lay thong tin conversations cua user nhan
                         strongSelf.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
                             guard var otherUserConversations = snapshot.value as? [[String: Any]]else {
                                 completion(false)
@@ -587,6 +607,7 @@ extension DatabaseManager {
                                 return
                             }
                             otherUserConversations[position] = finalConversation
+                            // update latest message for recipient user
                             strongSelf.database.child("\(otherUserEmail)/conversations").setValue(otherUserConversations, withCompletionBlock: { error, _ in
                                 guard error == nil else {
                                     completion(false)
