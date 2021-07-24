@@ -47,7 +47,7 @@
         <scene sceneID="U1d-2n-wZR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OcZ-SW-Oin" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chats" id="oWQ-EH-3fP"/>
+                    <tabBarItem key="tabBarItem" title="Chats" image="message" catalog="system" id="oWQ-EH-3fP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="krB-x8-XKZ">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -65,9 +65,8 @@
         <!--Profile-->
         <scene sceneID="wOT-jm-IGa">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgv-G1-yzh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="wUD-PI-JzT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="LsI-Zz-47H"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" id="LsI-Zz-47H"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="fEz-01-Wy7">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -76,6 +75,7 @@
                         <segue destination="hOL-kG-QPp" kind="relationship" relationship="rootViewController" id="SCi-Pd-RE1"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hgv-G1-yzh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1112" y="94"/>
         </scene>
@@ -112,6 +112,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
