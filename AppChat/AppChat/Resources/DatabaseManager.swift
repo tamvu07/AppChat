@@ -474,6 +474,7 @@ extension DatabaseManager {
         
         let currentEmail = DatabaseManager.safeEmail(emailAddress: myEmail)
         
+        // lay ra toan bo messages trong 1 id conversation
         database.child("\(conversation)/messages").observeSingleEvent(of: .value, with: { [weak self] snapshot in
             guard let strongSelf = self else {
                 return
@@ -536,7 +537,7 @@ extension DatabaseManager {
             ]
             
             currentMessages.append(newMessageEntry)
-            // add them 1 phan tu vao id messages
+            // add them 1 phan tu mesage vao conversation id
             strongSelf.database.child("\(conversation)/messages").setValue(currentMessages, withCompletionBlock: {error, _ in
                 guard error == nil else {
                     completion(false)
@@ -703,6 +704,7 @@ extension DatabaseManager {
         }
     }
     
+    // kiem tra conversation có trong hôi thoại của nguoi nhận ko, chứ đã kiem tra trong chính nguoi gui roi tai $0.otherUserEmail == DatabaseManager.safeEmail(emailAddress: result.email)(ConversationsViewController)
     public func conversationExists(with targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
         let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
         guard let senderEmail = UserDefaults.standard.value(forKey: "email") as? String else {
