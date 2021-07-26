@@ -13,7 +13,7 @@ class LocationPickerViewController: UIViewController {
     
     public var completion: ((CLLocationCoordinate2D) -> Void)?
     private var coordinates: CLLocationCoordinate2D?
-    private var isPickable = false
+    public var isPickable = false
     private let map: MKMapView = {
         let map = MKMapView()
         return map

@@ -158,6 +158,7 @@ class ChatViewController: MessagesViewController {
     private func presentLocationPicker() {
         let vc = LocationPickerViewController(coordinates: nil)
         vc.title = "Pick Location"
+        vc.isPickable = true
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.completion = { [weak self] selectedCoorindates in
             
