@@ -27,6 +27,7 @@
 		E5694BF826A6724500D00526 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694BF726A6724500D00526 /* StorageManager.swift */; };
 		E5694C0126A6B64B00D00526 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5694C0026A6B64B00D00526 /* ConversationTableViewCell.swift */; };
 		E58DEC2E26AAB1E200E82803 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58DEC2D26AAB1E200E82803 /* NewConversationCell.swift */; };
+		E58F8C3C26AC296000B22867 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58F8C3B26AC295F00B22867 /* LocationPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		E5694BF726A6724500D00526 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E5694C0026A6B64B00D00526 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		E58DEC2D26AAB1E200E82803 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
+		E58F8C3B26AC295F00B22867 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				E54EA99E26A520BB00DEAC00 /* NewConversationViewController.swift */,
 				E54EA9A126A520D900DEAC00 /* ProfileViewController.swift */,
 				E5694BF426A663EB00D00526 /* ChatViewController.swift */,
+				E58F8C3B26AC295F00B22867 /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				E5694BF526A663EB00D00526 /* ChatViewController.swift in Sources */,
 				E54EA99926A5206A00DEAC00 /* PhotoViewerViewController.swift in Sources */,
 				E5694BF826A6724500D00526 /* StorageManager.swift in Sources */,
+				E58F8C3C26AC296000B22867 /* LocationPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
