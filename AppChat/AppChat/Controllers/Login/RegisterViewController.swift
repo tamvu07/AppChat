@@ -214,6 +214,9 @@ class RegisterViewController: UIViewController {
                     print("Error creating user")
                     return
                 }
+                                                    
+                UserDefaults.standard.setValue(email , forKey: "email")
+                UserDefaults.standard.setValue("\(firstName)\(lastname)", forKey: "name")
                let chatUser = ChatAppUser(firstName: firstName,
                                            lastName: lastname,
                                            emailAddress: email)
